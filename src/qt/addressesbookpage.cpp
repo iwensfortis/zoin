@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-
-#include "ui_receivecoinspage.h"
+#include "AddressesBookPage.h"
+#include "ui_AddressesBookPage.h"
 
 #include "addresstablemodel.h"
 #include "optionsmodel.h"
@@ -11,7 +11,6 @@
 #include "editaddressdialog.h"
 #include "csvmodelwriter.h"
 #include "guiutil.h"
-#include "receivecoinspage.h"
 #include <QGraphicsDropShadowEffect>
 
 #ifdef USE_QRCODE
@@ -22,10 +21,10 @@
 #include <QClipboard>
 #include <QMessageBox>
 #include <QMenu>
-#include<QDialog>
 
-ReceiveCoinsPage::ReceiveCoinsPage(QWidget *parent) : QWidget(parent),
-    ui(new Ui::ReceiveCoinsPage),
+AddressesBookPage::AddressesBookPage(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::AddressesBookPage),
     model(0),
     optionsModel(0)
 {
@@ -41,40 +40,69 @@ ReceiveCoinsPage::ReceiveCoinsPage(QWidget *parent) : QWidget(parent),
     ui->tableView->verticalHeader()->hide();
     ui->tableView->setShowGrid(false);
 
-    //ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    //ui->tableView->horizontalHeader()->setFixedHeight(55);
+    //ui->tableView->setStyleSheet("QHeaderView::section {font-size:24px;color:white;height:30px;background-color:QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #121548, stop: 1 #4a0e95)}");
 
+/*
+    switch(mode)
+    {
+    case ForSending:
+        connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(accept()));
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->tableView->setFocus();
+        ui->exportButton->hide();
+        break;
+    case ForEditing:
+        /ui->buttonBox->setVisible(false);
 
+        break;
+    }
+*/
+    /*
+    // Build context menu
+    contextMenu = new QMenu();
+    contextMenu->addAction(copyAddressAction);
+    contextMenu->addAction(copyLabelAction);
+
+    if(tab != ZerocoinTab){
+        contextMenu->addAction(editAction);
+    }
+
+    if(tab == SendingTab)
+        contextMenu->addAction(deleteAction);
+    contextMenu->addSeparator();
+    if(tab == SendingTab)
+        contextMenu->addAction(sendCoinsAction);
+#ifdef USE_QRCODE
+    contextMenu->addAction(showQRCodeAction);
+#endif
+    if(tab == ReceivingTab)
+        contextMenu->addAction(signMessageAction);
+    else if(tab == SendingTab)
+        contextMenu->addAction(verifyMessageAction);
+*/
     // Connect signals for context menu actions
+
+    connect(ui->newAddress, SIGNAL(pressed()), this, SLOT(on_newAddress_clicked()));
     connect(ui->copyAddress, SIGNAL(pressed()), this, SLOT(on_copyAddress_clicked()));
-
-    //connect(editAction, SIGNAL(triggered()), this, SLOT(onEditAction()));
-
-    //connect(sendCoinsAction, SIGNAL(triggered()), this, SLOT(onSendCoinsAction()));
-
-    //connect(ui->deleteAddress, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
-    connect(ui->showQRCode, SIGNAL(pressed()), this, SLOT(on_showQRCode_clicked()));
-    connect(ui->signMessage, SIGNAL(pressed()), this, SLOT(on_signMessage_clicked()));
-    //connect(ui->verifyMessage, SIGNAL(triggered()), this, SLOT(on_verifyMessage_clicked()));
+    connect(ui->deleteAddress, SIGNAL(pressed()), this, SLOT(on_deleteAddress_clicked()));
+    connect(ui->sendAddress, SIGNAL(pressed()), this, SLOT(onSendCoinsAction()));
 
     connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextualMenu(QPoint)));
-
-    // Pass through accept action from button box
-    //connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 
     QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect();
     effect->setOffset(0);
     effect->setBlurRadius(20.0);
     //effect->setColor(QColor(247, 247, 247, 25));
     ui->frame_4->setGraphicsEffect(effect);
+
 }
 
-ReceiveCoinsPage::~ReceiveCoinsPage()
+AddressesBookPage::~AddressesBookPage()
 {
     delete ui;
 }
 
-void ReceiveCoinsPage::setModel(AddressTableModel *model)
+void AddressesBookPage::setModel(AddressTableModel *model)
 {
     this->model = model;
     if(!model)
@@ -86,9 +114,8 @@ void ReceiveCoinsPage::setModel(AddressTableModel *model)
     proxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
     proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
-        // Receive filter
-    proxyModel->setFilterRole(AddressTableModel::TypeRole);
-    proxyModel->setFilterFixedString(AddressTableModel::Receive);
+        proxyModel->setFilterRole(AddressTableModel::TypeRole);
+        proxyModel->setFilterFixedString(AddressTableModel::Send);
 
 
     ui->tableView->setModel(proxyModel);
@@ -109,25 +136,25 @@ void ReceiveCoinsPage::setModel(AddressTableModel *model)
     // Select row for newly created address
     connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)), this, SLOT(selectNewAddress(QModelIndex,int,int)));
 
-    selectionChanged();
+    //selectionChanged();
 }
 
-void ReceiveCoinsPage::setOptionsModel(OptionsModel *optionsModel)
+void AddressesBookPage::setOptionsModel(OptionsModel *optionsModel)
 {
     this->optionsModel = optionsModel;
 }
 
-void ReceiveCoinsPage::on_copyAddress_clicked()
+void AddressesBookPage::on_copyAddress_clicked()
 {
     GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Address);
 }
 
-void ReceiveCoinsPage::onCopyLabelAction()
+void AddressesBookPage::onCopyLabelAction()
 {
     GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Label);
 }
 
-void ReceiveCoinsPage::onEditAction()
+void AddressesBookPage::onEditAction()
 {
     if(!ui->tableView->selectionModel())
         return;
@@ -135,15 +162,14 @@ void ReceiveCoinsPage::onEditAction()
     if(indexes.isEmpty())
         return;
 
-    EditAddressDialog dlg(EditAddressDialog::EditReceivingAddress);
+    EditAddressDialog dlg( EditAddressDialog::EditSendingAddress );
     dlg.setModel(model);
     QModelIndex origIndex = proxyModel->mapToSource(indexes.at(0));
     dlg.loadRow(origIndex.row());
     dlg.exec();
 }
 
-/*
-void ReceiveCoinsPage::on_zerocoinMintButton_clicked()
+void AddressesBookPage::on_zerocoinMintButton_clicked()
 {
 
     std::string stringError;
@@ -161,7 +187,7 @@ void ReceiveCoinsPage::on_zerocoinMintButton_clicked()
 
 }
 
-void ReceiveCoinsPage::on_zerocoinSpendButton_clicked(){
+void AddressesBookPage::on_zerocoinSpendButton_clicked(){
 
     std::string stringError;
     if(!model->zerocoinSpend(this, stringError))
@@ -176,9 +202,9 @@ void ReceiveCoinsPage::on_zerocoinSpendButton_clicked(){
         }
     }
 }
-*/
 
-void ReceiveCoinsPage::on_signMessage_clicked()
+
+void AddressesBookPage::on_signMessage_clicked()
 {
     QTableView *table = ui->tableView;
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
@@ -190,8 +216,7 @@ void ReceiveCoinsPage::on_signMessage_clicked()
     }
 }
 
-/*
-void ReceiveCoinsPage::on_verifyMessage_clicked()
+void AddressesBookPage::on_verifyMessage_clicked()
 {
     QTableView *table = ui->tableView;
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
@@ -202,9 +227,8 @@ void ReceiveCoinsPage::on_verifyMessage_clicked()
         emit verifyMessage(address);
     }
 }
-*/
 
-void ReceiveCoinsPage::onSendCoinsAction()
+void AddressesBookPage::onSendCoinsAction()
 {
     QTableView *table = ui->tableView;
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
@@ -216,12 +240,12 @@ void ReceiveCoinsPage::onSendCoinsAction()
     }
 }
 
-void ReceiveCoinsPage::on_newAddress_clicked()
+void AddressesBookPage::on_newAddress_clicked()
 {
     if(!model)
         return;
 
-    EditAddressDialog dlg(EditAddressDialog::NewReceivingAddress, this);
+    EditAddressDialog dlg(EditAddressDialog::NewSendingAddress, this);
     dlg.setModel(model);
     if(dlg.exec())
     {
@@ -229,10 +253,8 @@ void ReceiveCoinsPage::on_newAddress_clicked()
     }
 }
 
-/*
-void ReceiveCoinsPage::on_deleteAddress_clicked()
+void AddressesBookPage::on_deleteAddress_clicked()
 {
-
     QTableView *table = ui->tableView;
     if(!table->selectionModel())
         return;
@@ -240,41 +262,66 @@ void ReceiveCoinsPage::on_deleteAddress_clicked()
     QModelIndexList indexes = table->selectionModel()->selectedRows();
     if(!indexes.isEmpty())
     {
-
         table->model()->removeRow(indexes.at(0).row());
     }
 }
-*/
-void ReceiveCoinsPage::selectionChanged()
+
+/*
+void AddressesBookPage::selectionChanged()
 {
     // Set button states based on selected tab and selection
     QTableView *table = ui->tableView;
-
-    table->setSelectionBehavior(QAbstractItemView::SelectRows);
-
     if(!table->selectionModel())
         return;
-    if(table->selectionModel()->currentIndex().row() >= 0)
-        table->selectionModel()->selectedRows(table->selectionModel()->currentIndex().row());
+
+    if(table->selectionModel()->hasSelection())
+    {
+        switch(tab)
+        {
+        case SendingTab:
+            // In sending tab, allow deletion of selection
+            ui->deleteAddress->setEnabled(true);
+            ui->deleteAddress->setVisible(true);
+            deleteAction->setEnabled(true);
+            ui->signMessage->setEnabled(false);
+            ui->signMessage->setVisible(false);
+            ui->verifyMessage->setEnabled(true);
+            ui->verifyMessage->setVisible(true);
+            break;
+        case ReceivingTab:
+            // Deleting receiving addresses, however, is not allowed
+            ui->deleteAddress->setEnabled(false);
+            ui->deleteAddress->setVisible(false);
+            deleteAction->setEnabled(false);
+            ui->signMessage->setEnabled(true);
+            ui->signMessage->setVisible(true);
+            ui->verifyMessage->setEnabled(false);
+            ui->verifyMessage->setVisible(false);
+            break;
+        case ZerocoinTab:
+           break;
+        }
+        ui->copyAddress->setEnabled(true);
+        ui->showQRCode->setEnabled(true);
+    }
     else
-        table->selectionModel()->clearCurrentIndex();
-
-
-
-        // Deleting receiving addresses, however, is not allowed
-        //ui->deleteAddress->setEnabled(false);
-        //ui->deleteAddress->setVisible(false);
-        //deleteAction->setEnabled(false);
+    {
+        ui->deleteAddress->setEnabled(false);
+        ui->showQRCode->setEnabled(false);
+        ui->copyAddress->setEnabled(false);
+        ui->signMessage->setEnabled(false);
+        ui->verifyMessage->setEnabled(false);
+    }
 }
-
-void ReceiveCoinsPage::done(int retval)
+*/
+void AddressesBookPage::done(int retval)
 {
+    return;
     QTableView *table = ui->tableView;
     if(!table->selectionModel() || !table->model())
         return;
     // When this is a tab/widget and not a model dialog, ignore "done"
-    if(mode == ForEditing)
-        return;
+
 
     // Figure out which address was selected, and return it
     QModelIndexList indexes = table->selectionModel()->selectedRows(AddressTableModel::Address);
@@ -288,13 +335,13 @@ void ReceiveCoinsPage::done(int retval)
     if(returnValue.isEmpty())
     {
         // If no address entry selected, return rejected
-        retval = QDialog::Rejected;
+        retval = Rejected;
     }
 
-    //QDialog::done(retval);
+    QDialog::done(retval);
 }
 
-void ReceiveCoinsPage::on_exportButton_clicked()
+void AddressesBookPage::on_exportButton_clicked()
 {
     // CSV is currently the only supported format
     QString filename = GUIUtil::getSaveFileName(
@@ -318,7 +365,7 @@ void ReceiveCoinsPage::on_exportButton_clicked()
     }
 }
 
-void ReceiveCoinsPage::on_showQRCode_clicked()
+void AddressesBookPage::on_showQRCode_clicked()
 {
 #ifdef USE_QRCODE
     QTableView *table = ui->tableView;
@@ -329,7 +376,7 @@ void ReceiveCoinsPage::on_showQRCode_clicked()
         QString address = index.data().toString();
         QString label = index.sibling(index.row(), 0).data(Qt::EditRole).toString();
 
-        QRCodeDialog *dialog = new QRCodeDialog(address, label, tab == ReceivingTab, this);
+        QRCodeDialog *dialog = new QRCodeDialog(address, label, 1, this);
         dialog->setModel(optionsModel);
         dialog->setAttribute(Qt::WA_DeleteOnClose);
         dialog->show();
@@ -337,7 +384,7 @@ void ReceiveCoinsPage::on_showQRCode_clicked()
 #endif
 }
 
-void ReceiveCoinsPage::contextualMenu(const QPoint &point)
+void AddressesBookPage::contextualMenu(const QPoint &point)
 {
     QModelIndex index = ui->tableView->indexAt(point);
     if(index.isValid())
@@ -346,7 +393,7 @@ void ReceiveCoinsPage::contextualMenu(const QPoint &point)
     }
 }
 
-void ReceiveCoinsPage::selectNewAddress(const QModelIndex &parent, int begin, int /*end*/)
+void AddressesBookPage::selectNewAddress(const QModelIndex &parent, int begin, int /*end*/)
 {
     QModelIndex idx = proxyModel->mapFromSource(model->index(begin, AddressTableModel::Address, parent));
     if(idx.isValid() && (idx.data(Qt::EditRole).toString() == newAddressToSelect))
