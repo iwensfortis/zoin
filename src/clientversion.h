@@ -1,4 +1,4 @@
-0#ifndef CLIENTVERSION_H
+#ifndef CLIENTVERSION_H
 #define CLIENTVERSION_H
 
 //
