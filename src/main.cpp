@@ -4101,7 +4101,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         else
             pfrom->fRelayTxes = true;
 
-        if (pfrom->cleanSubVer != "/Satoshi:0.8.7.5/" && pfrom->cleanSubVer != "/Satoshi:0.9.0.0/")
+        if (pfrom->cleanSubVer != "/Satoshi:0.8.7.5/" && pfrom->cleanSubVer != "/Zoin Core:0.9.0.0/")
         {
             printf("partner %s using obsolete version %s; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->strSubVer.c_str());
             pfrom->fDisconnect = true;
