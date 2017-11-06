@@ -13,7 +13,7 @@ Zoin is the implementation of the Zerocoin protocol ( http://zerocoin.org ) guar
  - Tail subsidy of 10 coins per block after 2 years (~10% per year)
 
 For more information, as well as an immediately useable, binary version of
-the zoin client sofware, see https://github.com/zoin/zoin/releases.
+the zoin client sofware, see https://github.com/zoinofficial/zoin/releases.
 
 License
 -------
@@ -40,7 +40,7 @@ match the project's coding conventions (see `doc/coding.txt`) or are
 controversial.
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/zoin/zoin/tags) are created
+completely stable. [Tags](https://github.com/zoinofficial/zoin/tags) are created
 regularly to indicate new official, stable release versions of Zoin.
 
 Testing
