@@ -35,7 +35,7 @@ SplashScreen::SplashScreen(const QPixmap &pixmap, Qt::WindowFlags f) :
     //int id = QFontDatabase::addApplicationFont(":/fonts/SourceSansPro-Regular");
     //QString font = QFontDatabase::applicationFontFamilies(id).at(0);
 
-    QString font            = "Arial";
+    QString font            = "ZoinLight";
 
     // load the bitmap for writing some text over it
     QPixmap newPixmap;

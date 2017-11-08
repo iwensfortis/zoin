@@ -1192,18 +1192,11 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
-	{"seed.zoin.ml", "seed.zoin.ml"},
-	{"zoin.mooo.com", "zoin.mooo.com"},
-	{"seed1.zoin.ml", "seed1.zoin.ml"},
-	{"zoin.crabdance.com", "zoin.crabdance.com"}, 
-	{"seed2.zoin.ml", "seed2.zoin.ml"},
-	{"zoin.ignorelist.com", "zoin.ignorelist.com"}, 
-	{"seed3.zoin.ml", "seed3.zoin.ml"},
-	{"zoin.jumpingcrab.com", "zoin.jumpingcrab.com"},
-	{"seed4.zoin.ml", "seed4.zoin.ml"},
-	{"zoin.chickenkiller.com", "zoin.chickenkiller.com"},	
-	{"seed5.zoin.ml", "seed5.zoin.ml"},
-	{"seed6.zoin.ml", "seed6.zoin.ml"},
+    {"node1.zoinofficial.com", "node1.zoinofficial.com"},
+    {"node2.zoinofficial.com", "node2.zoinofficial.com"},
+    {"node3.zoinofficial.com", "node3.zoinofficial.com"},
+    {"node4.zoinofficial.com", "node4.zoinofficial.com"},
+    {"node5.zoinofficial.com", "node5.zoinofficial.com"},
     {NULL, NULL}
 };
 

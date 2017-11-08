@@ -81,8 +81,8 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     //this->setStyleSheet(QString("QToolButton:hover {background-color: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #121548, stop: 1 #4a0e95); "
     //                            "color:white;}"));
     //this->setStyleSheet(QString("QToolButton:hover {background-color: #B5DAFF; " "text-color:white; border-color: red;}"));
-    QFont font("Helvetica");
-    QApplication::setFont(font);
+    //QFont font("Helvetica");
+   // QApplication::setFont(font);
 
 #ifndef Q_OS_MAC
     QApplication::setWindowIcon(QIcon(":icons/bitcoin"));
@@ -200,7 +200,10 @@ BitcoinGUI::~BitcoinGUI()
 
 void BitcoinGUI::createActions()
 {
-    QActionGroup *tabGroup = new QActionGroup(this);   
+    QActionGroup *tabGroup = new QActionGroup(this);
+
+
+
 
     overviewAction = new QAction(QIcon(":/icons/overview"), tr("&Overview"), this);
     overviewAction->setStatusTip(tr("Show general overview of wallet"));
@@ -258,7 +261,7 @@ void BitcoinGUI::createActions()
     communityAction->setToolTip(communityAction->statusTip());
     communityAction->setCheckable(true);
     communityAction->setEnabled(false);
-    tabGroup->addAction(communityAction);
+  tabGroup->addAction(communityAction);
 
     masterNodeAction = new QAction(QIcon(":/icons/masternode"), tr("Master Node"), this);
     masterNodeAction->setStatusTip(tr("Coming soon"));

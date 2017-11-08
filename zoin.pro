@@ -29,17 +29,17 @@ USE_IPV6=1
 BDB_LIB_SUFFIX=-4.8
 
 win32 {
-    BOOST_LIB_SUFFIX=-mgw49-mt-s-1_59
-    BOOST_INCLUDE_PATH=C:/deps/boost_1_59_0
-    BOOST_LIB_PATH=C:/deps/boost_1_59_0/stage/lib
-    BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
-    BDB_LIB_PATH=C:/deps/db-4.8.30.NC/build_unix
-    OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.2k/include
-    OPENSSL_LIB_PATH=C:/deps/openssl-1.0.2k
-    MINIUPNPC_INCLUDE_PATH=C:/deps
-    MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
-    QRENCODE_INCLUDE_PATH=C:\deps\qrencode-3.4.4
-    QRENCODE_LIB_PATH=C:\deps\qrencode-3.4.4\.libs
+    BOOST_LIB_SUFFIX=-mgw53-mt-s-1_50
+    BOOST_INCLUDE_PATH=C:/boost_1_50_0
+    BOOST_LIB_PATH=C:/boost_1_50_0/stage/lib
+    BDB_INCLUDE_PATH=C:/db-4.8.30.NC/build_unix
+    BDB_LIB_PATH=C:/db-4.8.30.NC/build_unix
+    OPENSSL_INCLUDE_PATH=C:/openssl/include
+    OPENSSL_LIB_PATH=C:/openssl
+    MINIUPNPC_INCLUDE_PATH=C:/miniupnpc
+    MINIUPNPC_LIB_PATH=C:/miniupnpc
+    QRENCODE_INCLUDE_PATH=C:\qrencode
+    QRENCODE_LIB_PATH=C:\qrencode\.libs
 }
 
 OBJECTS_DIR = build
@@ -136,9 +136,9 @@ LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
     LIBS += -lshlwapi
     genleveldb.commands = cd \"$$PWD\"/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB \"$$PWD\"/src/leveldb/libleveldb.a && $$QMAKE_RANLIB \"$$PWD\"/src/leveldb/libmemenv.a
 }
-genleveldb.target = $$PWD/src/leveldb/libleveldb.a
+#genleveldb.target = $$PWD/src/leveldb/libleveldb.a
 genleveldb.depends = FORCE
-PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
+#PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
 QMAKE_EXTRA_TARGETS += genleveldb
 # Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
 QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
@@ -433,40 +433,40 @@ doc/*.rst \
     src/test/*.h \
     src/qt/test/*.cpp \
     src/qt/test/*.h
-    
+
     # platform specific defaults, if not overridden on command line
     isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
     win32:BOOST_LIB_SUFFIX = -mgw44-mt-s-1_50
     }
-    
+
     isEmpty(BOOST_THREAD_LIB_SUFFIX) {
     BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
     }
-    
+
     isEmpty(BDB_LIB_PATH) {
     macx:BDB_LIB_PATH = /usr/local/lib/db48
     }
-    
+
     isEmpty(BDB_LIB_SUFFIX) {
     macx:BDB_LIB_SUFFIX = -4.8
     }
-    
+
     isEmpty(BDB_INCLUDE_PATH) {
     macx:BDB_INCLUDE_PATH = /usr/local/include/db48
     }
-    
+
     isEmpty(BOOST_LIB_PATH) {
     macx:BOOST_LIB_PATH = /usr/local/lib
     }
-    
+
     isEmpty(BOOST_INCLUDE_PATH) {
     macx:BOOST_INCLUDE_PATH = /usr/local/include
     }
-    
+
     win32:DEFINES += WIN32
     win32:RC_FILE = src/qt/res/bitcoin-qt.rc
-    
+
     win32:!contains(MINGW_THREAD_BUGFIX, 0) {
     # At least qmake's win32-g++-cross profile is missing the -lmingwthrd
     # thread-safety flag. GCC has -mthreads to enable this, but it doesn't
@@ -477,14 +477,14 @@ doc/*.rst \
     DEFINES += _MT
     QMAKE_LIBS_QT_ENTRY = -lmingwthrd $$QMAKE_LIBS_QT_ENTRY
     }
-    
+
     !win32:!macx {
     DEFINES += LINUX
     LIBS += -lrt
     # _FILE_OFFSET_BITS=64 lets 32-bit fopen transparently support large files.
     DEFINES += _FILE_OFFSET_BITS=64
     }
-    
+
     macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
     macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
     macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
@@ -493,7 +493,7 @@ doc/*.rst \
     macx:QMAKE_CFLAGS_THREAD += -pthread
     macx:QMAKE_LFLAGS_THREAD += -pthread
     macx:QMAKE_CXXFLAGS_THREAD += -pthread
-    
+
     # Set libraries and includes at end, to use platform-defined defaults if not overridden
     INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
     LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
@@ -503,12 +503,12 @@ doc/*.rst \
     LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
     win32:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
     macx:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
-    
+
     contains(RELEASE, 1) {
     !win32:!macx {
     # Linux: turn dynamic linking back on for c/c++ runtime libraries
     LIBS += -Wl,-Bdynamic
     }
     }
-    
+
     system($$QMAKE_LRELEASE -silent $$TRANSLATIONS)

@@ -410,7 +410,7 @@ border:0;
               <property name="font">
                <font>
                 <family>ZoinLight</family>
-                <pointsize>48</pointsize>
+                <pointsize>45</pointsize>
                </font>
               </property>
               <property name="autoFillBackground">
@@ -435,7 +435,7 @@ background-color: rgba(255, 255, 255,0);</string>
                 <property name="font">
                  <font>
                   <family>ZoinSemiBold</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                   <weight>75</weight>
                   <bold>true</bold>
                  </font>
@@ -457,7 +457,7 @@ color: white;</string>
                 <property name="font">
                  <font>
                   <family>ZoinLight</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -809,7 +809,7 @@ border-style:solid;</string>
                  <property name="font">
                   <font>
                    <family>ZoinSemiBold</family>
-                   <pointsize>16</pointsize>
+                   <pointsize>14</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
@@ -848,7 +848,7 @@ border-style:solid;</string>
                  <property name="font">
                   <font>
                    <family>Source Sans Pro</family>
-                   <pointsize>16</pointsize>
+                   <pointsize>14</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
@@ -1208,7 +1208,7 @@ border:0;
                <property name="font">
                 <font>
                  <family>ZoinLight</family>
-                 <pointsize>18</pointsize>
+                 <pointsize>14</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
@@ -1281,6 +1281,12 @@ border:0;
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Source Sans Pro</family>
@@ -1294,7 +1300,7 @@ border:0;
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;</string>
@@ -1312,6 +1318,12 @@ border-style:solid;</string>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Source Sans Pro</family>
@@ -1325,7 +1337,7 @@ border-style:solid;</string>
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;</string>
@@ -1343,6 +1355,12 @@ border-style:solid;</string>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Source Sans Pro</family>
@@ -1356,7 +1374,7 @@ border-style:solid;</string>
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;</string>
@@ -1374,6 +1392,12 @@ border-style:solid;</string>
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>140</width>
+                    <height>35</height>
+                   </size>
+                  </property>
                   <property name="font">
                    <font>
                     <family>Source Sans Pro</family>
@@ -1387,7 +1411,7 @@ border-style:solid;</string>
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;

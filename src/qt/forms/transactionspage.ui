@@ -410,7 +410,7 @@ border:0;
               <property name="font">
                <font>
                 <family>ZoinLight</family>
-                <pointsize>48</pointsize>
+                <pointsize>45</pointsize>
                </font>
               </property>
               <property name="autoFillBackground">
@@ -435,7 +435,7 @@ background-color: rgba(255, 255, 255,0);</string>
                 <property name="font">
                  <font>
                   <family>ZoinSemiBold</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                   <weight>75</weight>
                   <bold>true</bold>
                  </font>
@@ -457,7 +457,7 @@ color: white;</string>
                 <property name="font">
                  <font>
                   <family>ZoinLight</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -809,7 +809,7 @@ border-style:solid;</string>
                  <property name="font">
                   <font>
                    <family>ZoinSemiBold</family>
-                   <pointsize>16</pointsize>
+                   <pointsize>14</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
@@ -848,7 +848,7 @@ border-style:solid;</string>
                  <property name="font">
                   <font>
                    <family>Source Sans Pro</family>
-                   <pointsize>16</pointsize>
+                   <pointsize>14</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
@@ -1238,7 +1238,7 @@ border:0;
                 <bool>false</bool>
                </property>
                <attribute name="horizontalHeaderVisible">
-                <bool>true</bool>
+                <bool>false</bool>
                </attribute>
               </widget>
              </item>
@@ -1290,14 +1290,15 @@ border:0;
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(216, 216, 219);
+                   <string notr="true">background-color:  rgb(216, 216, 219);
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
-border-style:solid;</string>
+border-style:solid;
+</string>
                   </property>
                   <property name="text">
                    <string>Copy Address</string>
@@ -1321,14 +1322,15 @@ border-style:solid;</string>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: rgb(216, 216, 219);
+                   <string notr="true">background-color:  rgb(216, 216, 219);
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
-border-style:solid;</string>
+border-style:solid;
+</string>
                   </property>
                   <property name="text">
                    <string>Delete address</string>
@@ -1352,11 +1354,11 @@ border-style:solid;</string>
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-color: #121349;
+                   <string notr="true">background-color:  rgb(216, 216, 219);
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;
@@ -1386,7 +1388,7 @@ border-style:solid;
 color: white;
 border-radius:15px;
 height:35px;
-width:120px;
+width:140px;
 border-color:gray;
 border-width:0px;
 border-style:solid;
