@@ -20,14 +20,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "zoin"
-            VALUE "FileDescription",    "zoin-qt (OSS GUI client for zoin)"
+            VALUE "CompanyName",        "Zoin"
+            VALUE "FileDescription",    "Zoin Core"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "zoin-qt"
+            VALUE "InternalName",       "Zoin"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "zoin-qt.exe"
-            VALUE "ProductName",        "zoin-qt"
+            VALUE "OriginalFilename",   "Zoin.exe"
+            VALUE "ProductName",        "Zoin"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

@@ -80,7 +80,7 @@ TransactionView::TransactionView(QWidget *parent) :
     label_2->setText("Transactions");
     QFont font1;
     font1.setFamily(QStringLiteral("ZoinLight"));
-    font1.setPointSize(48);
+    font1.setPointSize(45);
     font1.setBold(false);
     //font1.setWeight(50);
     label_2->setFont(font1);
@@ -99,7 +99,7 @@ TransactionView::TransactionView(QWidget *parent) :
     priceUSD->setObjectName(QStringLiteral("priceUSD"));
     QFont font2;
     font2.setFamily(QStringLiteral("ZoinSemiBold"));
-    font2.setPointSize(15);
+    font2.setPointSize(14);
     font2.setBold(true);
     font2.setWeight(75);
     priceUSD->setFont(font2);
@@ -113,7 +113,7 @@ TransactionView::TransactionView(QWidget *parent) :
     priceBTC->setObjectName(QStringLiteral("priceBTC"));
     QFont font3;
     font3.setFamily(QStringLiteral("ZoinLight"));
-    font3.setPointSize(15);
+    font3.setPointSize(14);
     priceBTC->setFont(font3);
     priceBTC->setStyleSheet(QLatin1String("background-color: rgb(0,0,0,0);\n"
 "color: white;"));
@@ -229,7 +229,7 @@ TransactionView::TransactionView(QWidget *parent) :
     vlayout->setContentsMargins(0,0,0,0);
 
     QHBoxLayout *hlayout22 = new QHBoxLayout(this);
-    hlayout22->setContentsMargins(60,0,60,0);    // THISSSSSSSS
+    hlayout22->setContentsMargins(60,0,60,40);    // THISSSSSSSS
     //vlayout->setMargin(0);
     //vlayout->setSpacing(0);
 

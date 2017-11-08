@@ -260,14 +260,14 @@ void ReceiveCoinsPage::selectionChanged()
         table->selectionModel()->clearCurrentIndex();
 
     if(table->selectionModel()->isSelected(table->currentIndex())){
-        ui->copyAddress->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
-        ui->signMessage->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
-        ui->showQRCode->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->copyAddress->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->signMessage->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->showQRCode->setStyleSheet("background-color: #121349;color: white;border-radius:15px;height:40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
     }
     else{
-        ui->copyAddress->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
-        ui->signMessage->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
-        ui->showQRCode->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height:35px;width:120px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->copyAddress->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->signMessage->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height:40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
+        ui->showQRCode->setStyleSheet("background-color: rgb(216, 216, 219);color: white;border-radius:15px;height:40px;width:140px;border-color:gray;border-width:0px;border-style:solid;");
     }
 
         // Deleting receiving addresses, however, is not allowed

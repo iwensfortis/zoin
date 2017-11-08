@@ -179,6 +179,21 @@ void AddressBookPage::setModel(AddressTableModel *model)
     ui->tableView->setModel(proxyModel);
     ui->tableView->sortByColumn(0, Qt::AscendingOrder);
 
+    ui->tableView->setShowGrid(false);
+    ui->tableView->setStyleSheet(QLatin1String("QTableView::item{font-size:16px;height:30px;color:black;}"
+                                      "QHeaderView::section {font-size:16px;color:white;height:40px;background-color:#4a0e95}\n"
+                                      "QHeaderView::section:checked\n"
+                                      "{\n"
+                                      "    font-size:16px;color:white;height:40px;background-color:#4a0e95\n"
+                                      "}"));
+
+    ui->tableView->setTabKeyNavigation(false);
+    ui->tableView->setAlternatingRowColors(true);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSortingEnabled(true);
+    ui->tableView->verticalHeader()->setVisible(false);
+
     // Set column widths
 #if QT_VERSION < 0x050000
     ui->tableView->horizontalHeader()->setResizeMode(AddressTableModel::Label, QHeaderView::Stretch);

@@ -54,7 +54,7 @@
        <item>
         <widget class="QFrame" name="frame">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -62,6 +62,12 @@
          <property name="minimumSize">
           <size>
            <width>1000</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
            <height>100</height>
           </size>
          </property>
@@ -104,7 +110,7 @@
             <property name="font">
              <font>
               <family>ZoinLight</family>
-              <pointsize>48</pointsize>
+              <pointsize>45</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -119,14 +125,14 @@ color: white;</string>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <property name="spacing">
-             <number>-1</number>
+             <number>6</number>
             </property>
             <item>
              <widget class="QLabel" name="priceUSD">
               <property name="font">
                <font>
                 <family>ZoinSemiBold</family>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -148,7 +154,7 @@ color: white;</string>
               <property name="font">
                <font>
                 <family>ZoinLight</family>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="styleSheet">
@@ -206,7 +212,7 @@ color: white;</string>
       <number>60</number>
      </property>
      <property name="topMargin">
-      <number>0</number>
+      <number>15</number>
      </property>
      <property name="rightMargin">
       <number>60</number>
@@ -523,10 +529,10 @@ border-color:gray;
 border-width:thin;
 padding-left: 10;</string>
               </property>
-              <property name="text">
-               <string/>
+              <property name="text" stdset="0">
+               <string>0</string>
               </property>
-              <property name="placeholderText">
+              <property name="placeholderText" stdset="0">
                <string>0.00</string>
               </property>
              </widget>
@@ -631,7 +637,7 @@ font: url(:/fonts/SourceSansPro-Light);
              <property name="font">
               <font>
                <family>ZoinSemiBold</family>
-               <pointsize>16</pointsize>
+               <pointsize>15</pointsize>
                <weight>75</weight>
                <bold>true</bold>
               </font>
@@ -640,7 +646,7 @@ font: url(:/fonts/SourceSansPro-Light);
               <string notr="true">background-color: white;
 color: rgb(19, 19, 73);;
 border-radius:15px;
-height:30px;
+height:35px;
 width:120px;</string>
              </property>
              <property name="text">
@@ -756,6 +762,9 @@ color: rgb(0,0,0,0);</string>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <property name="leftMargin">
       <number>60</number>
      </property>
@@ -784,15 +793,15 @@ color: rgb(0,0,0,0);</string>
  </widget>
  <customwidgets>
   <customwidget>
+   <class>BitcoinAmountField</class>
+   <extends>QSpinBox</extends>
+   <header>bitcoinamountfield.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>QValidatedLineEdit</class>
    <extends>QLineEdit</extends>
    <header>qvalidatedlineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>BitcoinAmountField</class>
-   <extends>QLineEdit</extends>
-   <header>bitcoinamountfield.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

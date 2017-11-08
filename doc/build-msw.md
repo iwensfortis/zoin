@@ -42,6 +42,12 @@ Versions used in this release:
 	miniupnpc    1.6
 
 
+	
+	
+	
+TARGET_OS=OS_WINDOWS_CROSSCOMPILE make libleveldb.a libmemenv.a
+
+
 OpenSSL
 -------
 MSYS shell:
@@ -58,7 +64,8 @@ Berkeley DB
 MSYS shell:
 
 	cd /c/db-4.8.30.NC-mgw/build_unix
-	sh ../dist/configure --enable-mingw --enable-cxx
+	#sh ../dist/configure --enable-mingw --enable-cxx
+	../dist/configure --enable-cxx --enable-mingw --disable-pthread_api --disable-replication
 	make
 
 Boost
@@ -67,7 +74,8 @@ MSYS shell:
 
 	downloaded boost jam 3.1.18
 	cd \boost-1.50.0-mgw
-	bjam toolset=gcc --build-type=complete stage
+	bjam toolset=gcc --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread stage  
+	 b2 --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
 
 MiniUPnPc
 ---------

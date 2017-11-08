@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     Q_INIT_RESOURCE(bitcoin);
     QApplication app(argc, argv);
 
@@ -154,12 +155,12 @@ int main(int argc, char *argv[])
 
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
-    QApplication::setOrganizationName("zoin");
-    QApplication::setOrganizationDomain("zoin.tech");
+    QApplication::setOrganizationName("Zoin");
+    QApplication::setOrganizationDomain("ZoinOfficial.com");
     if(GetBoolArg("-testnet")) // Separate UI settings for testnet
-        QApplication::setApplicationName("Zoin-Qt-Testnet");
+        QApplication::setApplicationName("Zoin Core Testnet");
     else
-        QApplication::setApplicationName("Zoin-Qt");
+        QApplication::setApplicationName("Zoin Core");
 
     // ... then GUI settings:
     OptionsModel optionsModel;
@@ -237,7 +238,7 @@ int main(int argc, char *argv[])
 
         BitcoinGUI window;
         guiref = &window;
-
+        window.setStyleSheet("background-color:white; margin: 0; padding: 0; spacing: 0;");
         QTimer* pollShutdownTimer = new QTimer(guiref);
         QObject::connect(pollShutdownTimer, SIGNAL(timeout()), guiref, SLOT(detectShutdown()));
         pollShutdownTimer->start(200);

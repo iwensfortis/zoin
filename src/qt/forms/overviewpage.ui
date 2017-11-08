@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>906</width>
+    <width>915</width>
     <height>800</height>
    </rect>
   </property>
@@ -416,7 +416,7 @@ border:0;
               <property name="font">
                <font>
                 <family>ZoinLight</family>
-                <pointsize>48</pointsize>
+                <pointsize>45</pointsize>
                </font>
               </property>
               <property name="autoFillBackground">
@@ -428,6 +428,9 @@ background-color: rgba(255, 255, 255,0);</string>
               </property>
               <property name="text">
                <string>Overview</string>
+              </property>
+              <property name="scaledContents">
+               <bool>false</bool>
               </property>
               <property name="indent">
                <number>0</number>
@@ -444,7 +447,7 @@ background-color: rgba(255, 255, 255,0);</string>
                 <property name="font">
                  <font>
                   <family>ZoinSemiBold</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                   <weight>75</weight>
                   <bold>true</bold>
                  </font>
@@ -466,7 +469,7 @@ color: white;</string>
                 <property name="font">
                  <font>
                   <family>ZoinLight</family>
-                  <pointsize>15</pointsize>
+                  <pointsize>14</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -640,7 +643,7 @@ color: white;</string>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <property name="spacing">
-             <number>-1</number>
+             <number>6</number>
             </property>
             <property name="rightMargin">
              <number>0</number>
@@ -653,7 +656,7 @@ color: white;</string>
               <property name="font">
                <font>
                 <family>ZoinSemiBold</family>
-                <pointsize>16</pointsize>
+                <pointsize>15</pointsize>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
@@ -854,7 +857,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>ZoinSemiBold</family>
-                 <pointsize>18</pointsize>
+                 <pointsize>16</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -896,7 +899,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>Source Sans Pro</family>
-                 <pointsize>48</pointsize>
+                 <pointsize>42</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -932,7 +935,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>Source Sans Pro</family>
-                 <pointsize>20</pointsize>
+                 <pointsize>16</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -1122,7 +1125,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>Source Sans Pro</family>
-                 <pointsize>20</pointsize>
+                 <pointsize>16</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -1149,7 +1152,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>Source Sans Pro</family>
-                 <pointsize>48</pointsize>
+                 <pointsize>42</pointsize>
                  <weight>75</weight>
                  <italic>false</italic>
                  <bold>true</bold>
@@ -1189,7 +1192,7 @@ border:0;</string>
                <property name="font">
                 <font>
                  <family>ZoinSemiBold</family>
-                 <pointsize>18</pointsize>
+                 <pointsize>16</pointsize>
                  <weight>75</weight>
                  <bold>true</bold>
                 </font>
@@ -1850,7 +1853,7 @@ padding-bottom: 15;</string>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_6">
                 <property name="spacing">
-                 <number>60</number>
+                 <number>0</number>
                 </property>
                 <property name="leftMargin">
                  <number>25</number>
@@ -1872,16 +1875,28 @@ padding-bottom: 15;</string>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
                    <property name="rightMargin">
-                    <number>175</number>
+                    <number>0</number>
                    </property>
                    <item>
                     <widget class="QPushButton" name="seeAllTransactions">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>200</width>
+                       <height>0</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>ZoinSemiBold</family>
-                       <pointsize>14</pointsize>
+                       <pointsize>15</pointsize>
                        <weight>75</weight>
                        <bold>true</bold>
                       </font>
@@ -1910,6 +1925,19 @@ border-style:solid;</string>
                      </property>
                     </widget>
                    </item>
+                   <item>
+                    <spacer name="horizontalSpacer_4">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
                   </layout>
                  </widget>
                 </item>
@@ -1919,14 +1947,26 @@ border-style:solid;</string>
                    <number>15</number>
                   </property>
                   <property name="leftMargin">
-                   <number>100</number>
+                   <number>30</number>
                   </property>
                   <item>
                    <widget class="QPushButton" name="send">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>140</width>
+                      <height>0</height>
+                     </size>
+                    </property>
                     <property name="font">
                      <font>
                       <family>ZoinSemiBold</family>
-                      <pointsize>14</pointsize>
+                      <pointsize>15</pointsize>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
@@ -1949,10 +1989,22 @@ border-width:0px;</string>
                   </item>
                   <item>
                    <widget class="QPushButton" name="receive">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>140</width>
+                      <height>0</height>
+                     </size>
+                    </property>
                     <property name="font">
                      <font>
                       <family>ZoinSemiBold</family>
-                      <pointsize>14</pointsize>
+                      <pointsize>15</pointsize>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
@@ -1962,7 +2014,7 @@ border-width:0px;</string>
 color: white;
 border-radius:15px;
 height:35px;
-width:60px;
+width:80px;
 border-width:0px;</string>
                     </property>
                     <property name="text">

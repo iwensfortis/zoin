@@ -50,7 +50,7 @@ WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
 {
     // Create tabs
     overviewPage = new OverviewPage();
-
+    qDebug() << "SSL VERSION: "  + QSslSocket::sslLibraryBuildVersionString();
     transactionsPage = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout();
     QHBoxLayout *hbox_buttons = new QHBoxLayout();
@@ -67,7 +67,7 @@ WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
     exportButton->setStyleSheet(QLatin1String("background-color: rgb(57, 0, 130,0); color: gray;"
                                               "border-radius:15px; border-width:0px;"));
 
-    hbox_buttons->setContentsMargins(60,0,60,0);
+   hbox_buttons->setContentsMargins(60,0,60,0);
     hbox_buttons->addStretch();
     hbox_buttons->addWidget(exportButton);
     vbox->addLayout(hbox_buttons);
@@ -247,15 +247,9 @@ void WalletView::gotoOverviewPage()
 {
     gui->getOverviewAction()->setChecked(true);
     setCurrentWidget(overviewPage);
-    if (!gui->progressBar->isVisible()){
-        overviewPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
-    }
-    else{
+    overviewPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
     overviewPage->statusText->addWidget(gui->progressBarLabel);
     overviewPage->statusBar->addWidget(gui->progressBar);
-    overviewPage->statusBar->addWidget(gui->frameBlocks);
-    }
-
 }
 
 void WalletView::gotoCommunityPage()
@@ -266,6 +260,7 @@ void WalletView::gotoCommunityPage()
 void WalletView::gotoHistoryPage()
 {
 
+    statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
     statusText->addWidget(gui->progressBarLabel);
     statusBar->addWidget(gui->progressBar);
     gui->getHistoryAction()->setChecked(true);
@@ -275,6 +270,8 @@ void WalletView::gotoHistoryPage()
 
 void WalletView::gotoAddressBookPage()
 {
+    addressBookPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
+
     addressBookPage->statusText->addWidget(gui->progressBarLabel);
     addressBookPage->statusBar->addWidget(gui->progressBar);
     gui->getAddressBookAction()->setChecked(true);
@@ -284,6 +281,8 @@ void WalletView::gotoAddressBookPage()
 
 void WalletView::gotoReceiveCoinsPage()
 {
+    receiveCoinsPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
+
     receiveCoinsPage->statusText->addWidget(gui->progressBarLabel);
     receiveCoinsPage->statusBar->addWidget(gui->progressBar);
     gui->getReceiveCoinsAction()->setChecked(true);
@@ -293,6 +292,8 @@ void WalletView::gotoReceiveCoinsPage()
 
 void WalletView::gotoZerocoinPage()
 {
+    zerocoinPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
+
     zerocoinPage->statusText->addWidget(gui->progressBarLabel);
     zerocoinPage->statusBar->addWidget(gui->progressBar);
     gui->getZerocoinAction()->setChecked(true);
@@ -309,6 +310,8 @@ void WalletView::gotoLearnMorePage()
 
 void WalletView::gotoSendCoinsPage(QString addr, QString name)
 {
+
+    sendCoinsPage->statusBar->addWidget(gui->frameBlocks, 0, Qt::AlignRight);
 
     sendCoinsPage->statusText->addWidget(gui->progressBarLabel);
     sendCoinsPage->statusBar->addWidget(gui->progressBar);
