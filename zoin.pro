@@ -73,13 +73,13 @@ contains(USE_QRCODE, 1) {
 #  or: qmake "USE_UPNP=-" (not supported)
 # miniupnpc (http://miniupnp.free.fr/files/) must be installed for support
 contains(USE_UPNP, -) {
-    message(Building without UPNP support)
+    message("Building without UPnP support$$escape_expand(\\n)")
 } else {
-    message(Building with UPNP support)
+    message("Building with the UPnP support$$escape_expand(\\n)")
     count(USE_UPNP, 0) {
         USE_UPNP=1
     }
-    DEFINES += USE_UPNP=$$USE_UPNP MINIUPNP_STATICLIB
+    DEFINES += USE_UPNP=$$USE_UPNP STATICLIB
     INCLUDEPATH += $$MINIUPNPC_INCLUDE_PATH
     LIBS += $$join(MINIUPNPC_LIB_PATH,,-L,) -lminiupnpc
     win32:LIBS += -liphlpapi
@@ -461,37 +461,28 @@ doc/*.rst \
     QMAKE_LIBS_QT_ENTRY = -lmingwthrd $$QMAKE_LIBS_QT_ENTRY
     }
 
-    !win32:!macx {
+!windows:!macx {
     DEFINES += LINUX
     LIBS += -lrt
-    # _FILE_OFFSET_BITS=64 lets 32-bit fopen transparently support large files.
-    DEFINES += _FILE_OFFSET_BITS=64
-    }
+}
 
-    macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
-    macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
-    macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
-    macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-    macx:ICON = src/qt/res/icons/zoin.icns
-    macx:QMAKE_CFLAGS_THREAD += -pthread
-    macx:QMAKE_LFLAGS_THREAD += -pthread
-    macx:QMAKE_CXXFLAGS_THREAD += -pthread
+macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
+macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
+macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
+macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
+macx:ICON = src/qt/res/icons/trezarcoin.icns
+macx:TARGET = "Trezarcoin-Qt"
+macx:QMAKE_CFLAGS_THREAD += -pthread
+macx:QMAKE_LFLAGS_THREAD += -pthread
+macx:QMAKE_CXXFLAGS_THREAD += -pthread
 
-    # Set libraries and includes at end, to use platform-defined defaults if not overridden
-    INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
-    LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
-    LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
-    # -lgdi32 has to happen after -lcrypto (see  #681)
-    win32:LIBS += -lws2_32 -lshlwapi -lmswsock -lole32 -loleaut32 -luuid -lgdi32
-    LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
-    win32:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
-    macx:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
+# Set libraries and includes at end, to use platform-defined defaults if not overridden
+INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
+LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
+LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+# -lgdi32 has to happen after -lcrypto (see  #681)
+windows:LIBS += -lws2_32 -lshlwapi -lmswsock -lole32 -loleaut32 -luuid -lgdi32
+LIBS += -lboost_system$$BOOST_LIB_SUFFIX -lboost_filesystem$$BOOST_LIB_SUFFIX -lboost_program_options$$BOOST_LIB_SUFFIX -lboost_thread$$BOOST_THREAD_LIB_SUFFIX
+windows:LIBS += -lboost_chrono$$BOOST_LIB_SUFFIX
 
-    contains(RELEASE, 1) {
-    !win32:!macx {
-    # Linux: turn dynamic linking back on for c/c++ runtime libraries
-    LIBS += -Wl,-Bdynamic
-    }
-    }
-
-    system($$QMAKE_LRELEASE -silent $$TRANSLATIONS)
+system($$QMAKE_LRELEASE -silent $$_PRO_FILE_)
