@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = Zoin
+TARGET = Zoin-qt
 macx:TARGET = "Zoin"
 VERSION = 0.9.0.1
 INCLUDEPATH += src src/json src/qt
@@ -27,20 +27,6 @@ USE_IPV6=1
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
 BDB_LIB_SUFFIX=-4.8
-
-win32 {
-    BOOST_LIB_SUFFIX=-mgw53-mt-s-1_50
-    BOOST_INCLUDE_PATH=C:/boost_1_50_0
-    BOOST_LIB_PATH=C:/boost_1_50_0/stage/lib
-    BDB_INCLUDE_PATH=C:/db-4.8.30.NC/build_unix
-    BDB_LIB_PATH=C:/db-4.8.30.NC/build_unix
-    OPENSSL_INCLUDE_PATH=C:/openssl/include
-    OPENSSL_LIB_PATH=C:/openssl
-    MINIUPNPC_INCLUDE_PATH=C:/miniupnpc
-    MINIUPNPC_LIB_PATH=C:/miniupnpc
-    QRENCODE_INCLUDE_PATH=C:\qrencode
-    QRENCODE_LIB_PATH=C:\qrencode\.libs
-}
 
 OBJECTS_DIR = build
 MOC_DIR = build
@@ -124,24 +110,21 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
 }
 
 INCLUDEPATH += src/leveldb/include src/leveldb/helpers
-LIBS += $$PWD/src/leveldb/libleveldb.a $$PWD/src/leveldb/libmemenv.a
+LIBS += -Lsrc/leveldb -lleveldb -lmemenv
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
-    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT="$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE" libleveldb.a libmemenv.a
+    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
+    # Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
+    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
 } else {
-    # make an educated guess about what the ranlib command is called
-    isEmpty(QMAKE_RANLIB) {
-        QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
-    }
     LIBS += -lshlwapi
-    genleveldb.commands = cd \"$$PWD\"/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB \"$$PWD\"/src/leveldb/libleveldb.a && $$QMAKE_RANLIB \"$$PWD\"/src/leveldb/libmemenv.a
+    genleveldb.commands = cd $$PWD/src/leveldb; $(MAKE) -f Makefile.mingw
+    QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a
+    QMAKE_CLEAN += $$PWD/src/leveldb/libmemenv.a
+    QMAKE_CLEAN += $$PWD/src/leveldb/obj/*.o
 }
-#genleveldb.target = $$PWD/src/leveldb/libleveldb.a
-genleveldb.depends = FORCE
-#PRE_TARGETDEPS += $$PWD/src/leveldb/libleveldb.a
+PRE_TARGETDEPS += genleveldb
 QMAKE_EXTRA_TARGETS += genleveldb
-# Gross ugly hack that depends on qmake internals, unfortunately there is no other way to do it.
-QMAKE_CLEAN += $$PWD/src/leveldb/libleveldb.a; cd $$PWD/src/leveldb ; $(MAKE) clean
 
 # regenerate src/build.h
 !win32|contains(USE_BUILD_INFO, 1) {
