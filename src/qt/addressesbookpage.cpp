@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "AddressesBookPage.h"
-#include "ui_AddressesBookPage.h"
+#include "addressesbookpage.h"
+#include "ui_addressesbookpage.h"
 
 #include "addresstablemodel.h"
 #include "optionsmodel.h"
