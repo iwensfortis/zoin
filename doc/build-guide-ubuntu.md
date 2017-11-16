@@ -48,5 +48,5 @@ qmake -qt=qt5
 ```
 make
 ```
-```
+
 After some time the zoin-qt file will be in the zoin dir in your home folder.
